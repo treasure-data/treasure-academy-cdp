@@ -1,0 +1,20 @@
+_export:
+  !include : config/params.yml
+
+#timezone: Asia/Tokyo
+
+#schedule:
+#  daily>: 02:00:00
+
++step1:
+  docker:
+    image: "digdag/digdag-python:3.7"
+  py>: py_scripts.tasks.rss_import
+  dest_db: ${td.database}
+  dest_table: ${td.table}
+  rss_url_list:
+    - "https://www.vogue.co.jp/rss/vogue"
+    - "https://feeds.dailyfeed.jp/feed/s/7/887.rss"
+  _env:
+    TD_API_KEY: ${secret:td.apikey}
+    TD_API_SERVER: ${secret:td.apiserver}

@@ -1,0 +1,13 @@
+pytd[spark]
+td-pyspark
+numpy
+scipy
+pandas
+matplotlib
+boto3
+plotly
+seaborn
+scikit-learn
+lightgbm
+pystan
+fbprophet

@@ -1,0 +1,13 @@
+_export:
+  td:
+    database: access_summary
+
++access_summarization_pandas:
+    py>: py_scripts.examples.summarize_access_pandas
+    database_name: ${td.database}
+    table_name: summarized_tbl_pandas
+    docker:
+        image: "digdag/digdag-python:3.7"
+    _env:
+        TD_API_KEY: ${secret:td.apikey}
+        TD_API_SERVER: ${secret:td.apiserver}

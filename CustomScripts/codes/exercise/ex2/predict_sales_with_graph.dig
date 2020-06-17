@@ -1,0 +1,32 @@
+_export:
+  !include : config/params.yml
+
++predict:
+  py>: py_scripts.predict.TimeSeriesPredictor.run
+  database: ${td.database}
+  source_table: ${source_table}
+  target_table: ${target_table}
+  start_date: ${start_date}
+  end_date: ${end_date}
+  period: 365
+  docker:
+    image: 'digdag/digdag-python:3.7'
+  _env:
+    TD_API_KEY: ${secret:td.apikey}
+    TD_API_SERVER: ${secret:td.apiserver}
+    AWS_ACCESS_KEY_ID: ${secret:s3.access_key_id}
+    AWS_SECRET_ACCESS_KEY: ${secret:s3.secret_access_key}
+    S3_BUCKET: ${secret:s3.bucket}
+
++send_graph:
+  http>: ${secret:slack_webhook_url}
+  method: POST
+  content:
+    attachments:
+      - title: "Prediction finished"
+        text: "Predicted sales"
+        image_url: "https://s3.amazonaws.com/${secret:s3_bucket}/predicted.png"
+        color: normal
+      - text: "Component"
+        image_url: "https://s3.amazonaws.com/${secret:s3_bucket}/component.png"
+  content_format: json

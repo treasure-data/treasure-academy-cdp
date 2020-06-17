@@ -1,0 +1,23 @@
+_export:
+  td:
+    database: pandas_test
+
++read_into_df:
+  py>: py_scripts.examples.read_td_table
+  database_name: sample_datasets
+  table_name: nasdaq
+  docker:
+    image: "digdag/digdag-python:3.7"
+  _env:
+    TD_API_KEY: ${secret:td.apikey}
+    TD_API_SERVER: ${secret:td.apiserver}
+
++write_into_td:
+  py>: py_scripts.examples.write_td_table
+  database_name: ${td.database}
+  table_name: my_df
+  docker:
+    image: "digdag/digdag-python:3.7"
+  _env:
+    TD_API_KEY: ${secret:td.apikey}
+    TD_API_SERVER: ${secret:td.apiserver}
