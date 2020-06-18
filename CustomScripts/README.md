@@ -26,6 +26,18 @@ For setting up macOS environment from scratch, run:
 
 Note that, to install Python, root password is required.
 
+After running the script, you can activate the virtual environment as:
+
+```sh
+source ~/training/bin/activate
+```
+
+After activation, check the installed packages with:
+
+```sh
+pip freeze
+```
+
 ### Windows10
 
 For setting up Windows environment, download Anaconda3-2019.03 from either of the following URLs:
