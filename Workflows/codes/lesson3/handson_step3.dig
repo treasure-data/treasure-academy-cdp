@@ -1,0 +1,9 @@
+_error:
+  +send_email:
+    mail>:
+      data: |
+        Hi!
+    subject: TD Workflow error notification # メール件名
+    to: [mochizuki@treasure-data.com] # メール宛先。カンマ区切りで複数指定可能
++fails:
+  fail>: "Fail"

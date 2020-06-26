@@ -1,0 +1,23 @@
+_export:
+  td:
+    database: wf_handson_db
+
++prepare_table:
+  td_ddl>:
+  database: ${td.database}
+  create_tables:
+  - customers
+
++load_from_s3:
+  td_load>: config/customers.yml
+  database: ${td.database}
+  table: customers
+
++export_to_s3:
+  td>:
+  query: select * from customers
+  result_connection: workflow_handson
+  result_settings:
+    bucket: hands-on-seminar
+    path: /output/file_${moment(session_time).format("YYYYMMDD")}.csv
+    header: true

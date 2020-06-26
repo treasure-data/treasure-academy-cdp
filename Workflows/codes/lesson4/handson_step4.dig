@@ -1,0 +1,22 @@
+_export:
+  numbers:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9 
+  - 10
+
++loop:
+  for_each>:
+    i : ${numbers}
+  _do:
+    +condition:
+      if>: ${i % 2 == 0}
+      _do:
+        +echo:
+          echo>: ${i}

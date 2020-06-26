@@ -1,0 +1,26 @@
+in:
+  type: s3
+  access_key_id: ${secret:aws.access_key_id}
+  secret_access_key: ${secret:aws.secret_access_key}
+  bucket: hands-on-seminar
+  path_prefix: wf_sample.csv
+  parser:
+    charset: UTF-8
+    newline: CRLF
+    type: csv
+    delimiter: ","
+    quote: "\""
+    escape: "\""
+    trim_if_not_quoted: false
+    skip_header_lines: 1
+    allow_extra_columns: false
+    allow_optional_columns: false
+    columns:
+    - {name: member_id, type: long}
+    - {name: goods_id, type: long}
+    - {name: category, type: string}
+    - {name: sub_category, type: string}
+    - {name: ship_date, type: timestamp, format: "%Y-%m-%d %H:%M:%S.%L"}
+    - {name: amount, type: long}
+    - {name: price, type: long}
+    - {name: time, type: long}
