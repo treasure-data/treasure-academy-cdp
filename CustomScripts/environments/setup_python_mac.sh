@@ -17,5 +17,5 @@ rm /tmp/python.pkg
 /Applications/Python\ ${PYTHON_VERSION}/Install\ Certificates.command
 ${PY_CMD} -m pip install --upgrade pip
 ${PY_CMD} -m venv ${VENV_PATH}
-.venv/bin/python -m pip install --upgrade pip
-.venv/bin/python -m pip install -r requirements.txt -c constraints.txt
+${VENV_PATH}/bin/python -m pip install --upgrade pip
+${VENV_PATH}/bin/python -m pip install -r requirements.txt -c constraints.txt
