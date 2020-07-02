@@ -21,7 +21,8 @@ exercise is for more advanced hands-on examples.
 For setting up macOS environment from scratch, run:
 
 ```sh
-./environments/setup_python_mac.sh
+$ cd environments
+$ ./setup_python_mac.sh
 ```
 
 Note that, to install Python, root password is required.
