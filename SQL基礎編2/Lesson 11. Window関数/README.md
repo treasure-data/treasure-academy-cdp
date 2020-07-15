@@ -606,15 +606,6 @@ ORDER BY m, category, ratio DESC
 
 
 
-```sql
-ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW：区間のはじめから現在の行（自己）まで
-```
-
-```sql
-ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
-```
-
-
 ### NTH_VALUE：n番目の行の値を返す
 
 
