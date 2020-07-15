@@ -122,26 +122,6 @@ LIMIT 100
 
 
 今回はTD_INTERVALを使いますので冒頭のコメントアウトでTD_SCHEDULED_TIME関数を記述しておきます。また，実行時には日付を「2014-12-25」としてください。
-```sql
-/* ログの範囲 [2014-09-05, 2015-01-07] */
-/* TD_SCHEDULED_TIME() = '2014-12-25 00:00:00' */
-WITH before_1month AS
-(
-  SELECT td_client_id
-  FROM sample_accesslog_fluentd
-  WHERE TD_INTERVAL(time, '-10y/-1M', 'JST') /* 1ヶ月前より過去 */
-  AND td_client_id IS NOT NULL
-  GROUP BY td_client_id
-),
-past_1month AS
-(
-  SELECT td_client_id, MIN(time) AS min_time, MAX(time) AS max_time
-  FROM sample_accesslog_fluentd
-  WHERE TD_INTERVAL(time, '-1M', 'JST') /* 前月1ヶ月間 */
-  AND td_client_id IS NOT NULL
-  GROUP BY td_client_id
-)
-```
 
 
 ```sql
