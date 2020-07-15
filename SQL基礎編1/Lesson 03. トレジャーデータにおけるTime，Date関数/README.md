@@ -51,17 +51,6 @@ FROM ( VALUES 1466409507 ) AS t(time)
 
 
 ```sql
-day1, 2016-06-20
-day2, 2016/06/20
-day3, 2016/6/20
-time1, 2016-06-20 16:58:27
-time2, 2016-06-20 04:58:27 PM
-time3, 2016-06-20 16:58:27+09:00
-time4, 2016-06-20 16:58:27 GMT+09:00
-time5, 2016-06-20 16:58:27:000
-```
-
-```sql
 SELECT
   TD_TIME_FORMAT(time, 'yyyy-MM-dd', 'JST') AS d1,
   TD_TIME_FORMAT(time, 'yyyy-MM-dd HH:00:00', 'JST') AS d2,
