@@ -416,7 +416,6 @@ GROUP BY GROUPING SETS(
 
 
 ### ROLLUP
-ROLLUPは，GROUPING SETSの特殊版で，階層を意識した集計を適宜行います。引数として記述したディメンジョンのすべてについて，サブ集計を行います。まず引数が2つの場合を見てみましょう。
 
 ```sql
 SELECT category, sub_category, SUM(price*amount) AS sales,
