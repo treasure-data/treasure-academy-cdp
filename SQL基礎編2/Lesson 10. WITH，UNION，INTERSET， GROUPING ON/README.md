@@ -127,7 +127,8 @@ column 1 in UNION query has incompatible types: integer, varchar(1)
 SELECT number FROM ( VALUES 1,2,3 ) AS t(number)
 UNION ALL
 SELECT number, alphabet FROM ( VALUES (1,'a'),(2,'b'),(3,'c') ) AS t(number, alphabet)
-```sql
+```
+
 ```sql
 UNION query has different number of fields: 1, 2
 ```
@@ -139,6 +140,7 @@ SELECT number, alphabet FROM ( VALUES (1,'a'),(2,'b'),(3,'c') ) AS t(number, alp
 UNION ALL
 SELECT alphabet, number FROM ( VALUES (1,'a'),(2,'b'),(3,'c') ) AS t(number, alphabet)
 ```
+
 ```sql
 column 1 in UNION query has incompatible types: integer, varchar(1)
 ```
