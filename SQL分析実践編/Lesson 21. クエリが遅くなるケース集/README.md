@@ -194,12 +194,6 @@ SELECT ... FROM large_table l, small_table s WHERE l.id = s.id
 ## TD_TIME_RANGEでTime Indexの効用が効いていない
 
 
-### 終点（end_time）が省略されている
-
-```sql
-SELECT ... WHERE TD_TIME_RANGE(time, '2013-01-01, JST') --NG
-SELECT ... WHERE TD_TIME_RANGE(time, '2013-01-01', NULL, 'JST') --OK
-```
 
 ### 引数内での計算で割り算をしている，結果がFLOAT型となる
 
