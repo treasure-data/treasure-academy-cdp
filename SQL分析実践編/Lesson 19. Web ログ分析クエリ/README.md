@@ -263,21 +263,7 @@ GROUP BY segment
 
 ### アクティビティの推移
 
-```sql
-SELECT 
-  TD_TIME_FORMAT(TD_DATE_TRUNC('month', TD_DATE_TRUNC('month', TD_SCHEDULED_TIME(),'JST')-1, 'JST'),'yyyy-MM-dd','JST') AS target_month,
-  activity_past_1month.td_client_id, 
-  activity_past_1month.segment AS activity_past_1,
-  activity_past_2month.segment AS activity_past_2,
-  activity_past_1month.min_time AS min_time_past_1,
-  activity_past_1month.max_time AS max_time_past_1,
-  activity_past_2month.min_time AS min_time_past_2, 
-  activity_past_2month.max_time AS max_time_past_2
-FROM activity_past_1month
-LEFT OUTER JOIN activity_past_2month
-ON activity_past_1month.td_client_id = activity_past_2month.td_client_id
-/* 集合 activity_past_1month は activity_past_2month を内包する */
-```
+
 
 
 ```sql
