@@ -1,0 +1,11 @@
+timezone: Asia/Tokyo
+schedule:
+  monthly>: 5,06:30:00
+
+_export:
+  td:
+    database: sample_datasets
+
++run_query:
+  td>: 
+    data: SELECT COUNT(*) from sample_datasets.www_access
