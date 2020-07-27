@@ -16,11 +16,12 @@ def summarize_access(database_name, table_name):
         database=database_name
     )
 
+    client.create_database_if_not_exists(database_name)
+
     res = client.query("select code, method, count(1) as access_count from sample_datasets.www_access group by 1, 2")
     df = pd.DataFrame(**res)
 
 
-    client.create_database_if_not_exists(database_name)
     client.load_table_from_dataframe(
         df,
         f"{database_name}.{table_name}",
@@ -37,12 +38,12 @@ def summarize_access_pandas(database_name, table_name):
         database=database_name
     )
 
+    client.create_database_if_not_exists(database_name)
+    
     res = client.query(f"select code, method from  sample_datasets.www_access")
     df = pd.DataFrame(**res)
     df2 = df.groupby(["code", "method"]).size.to_frame("size").reset_index()
 
-
-    client.create_database_if_not_exists(database_name)
     client.load_table_from_dataframe(
         df2,
         f"{database_name}.{table_name}",
