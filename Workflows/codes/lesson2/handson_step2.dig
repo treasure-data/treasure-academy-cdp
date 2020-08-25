@@ -16,7 +16,7 @@ _export:
 +export_to_s3:
   td>:
   query: select * from customers
-  result_connection: workflow_handson
+  result_connection: wf_handson_s3
   result_settings:
     bucket: hands-on-seminar
     path: /output/file_${moment(session_time).format("YYYYMMDD")}.csv
