@@ -1,0 +1,19 @@
+_export:
+  td:
+    database: tdce
+    table: sample_accesslog
+    
++info:
+  td>:
+  query: | 
+    select 
+      array_join(array_agg(column_name), ',') as query
+    from information_schema.columns 
+    where table_schema = '${td.database}' 
+    and table_name = '${td.table}' 
+    and column_name like 'td%'
+  store_last_results: true
+
++extract:
+  td>:
+  query: select ${td.last_results.query} from ${td.table} limit 100
