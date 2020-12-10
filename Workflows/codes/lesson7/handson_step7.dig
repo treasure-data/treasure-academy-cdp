@@ -16,4 +16,4 @@ _export:
 
 +extract:
   td>:
-  query: select ${td.last_results.query} from ${td.table} limit 100
+  query: select ${td.last_results.query} from ${td.database}.${td.table} limit 100
