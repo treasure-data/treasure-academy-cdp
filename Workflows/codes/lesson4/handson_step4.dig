@@ -1,11 +1,8 @@
-timezone: Asia/Tokyo
-schedule:
-  monthly>: 5,06:30:00
-
 _export:
+  month: ${moment(session_time).format('YYYY_MM')}
   td:
-    database: sample_datasets
+    database: wf_handson_db
 
-+run_query:
-  td>: 
-    data: SELECT COUNT(*) from sample_datasets.www_access
++create_table:
+  td_ddl>:
+  create_tables: ["accesslog_${month}"]

@@ -1,8 +1,9 @@
-_export:
-  month: ${moment(session_time).format('YYYY_MM')}
-  td:
-    database: wf_handson_db
-
-+create_table:
-  td_ddl>:
-  create_tables: ["accesslog_${month}"]
+_error:
+  +send_email:
+    mail>:
+      data: |
+        Hi!
+    subject: TD Workflow error notification # メール件名
+    to: [mochizuki@treasure-data.com] # メール宛先。カンマ区切りで複数指定可能
++fails:
+  fail>: "Fail"

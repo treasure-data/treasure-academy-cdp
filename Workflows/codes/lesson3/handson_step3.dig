@@ -1,9 +1,11 @@
-_error:
-  +send_email:
-    mail>:
-      data: |
-        Hi!
-    subject: TD Workflow error notification # メール件名
-    to: [mochizuki@treasure-data.com] # メール宛先。カンマ区切りで複数指定可能
-+fails:
-  fail>: "Fail"
+timezone: Asia/Tokyo
+schedule:
+  monthly>: 5,06:30:00
+
+_export:
+  td:
+    database: sample_datasets
+
++run_query:
+  td>: 
+    data: SELECT COUNT(*) from sample_datasets.www_access
