@@ -8,4 +8,4 @@ _export:
 
 +run_query:
   td>: 
-    data: SELECT COUNT(*) from sample_datasets.www_access
+  query: SELECT COUNT(*) from sample_datasets.www_access
