@@ -1,6 +1,6 @@
 import os, sys
 
-os.system(f"{sys.executable} -m pip install --upgrade pytd")
+os.system(f"{sys.executable} -m pip install --upgrade pytd==1.4.3")
 
 def read_td_table(database_name, table_name, limit=1000):
     import pytd

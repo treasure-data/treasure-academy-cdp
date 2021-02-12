@@ -7,7 +7,7 @@ import sys
 import pandas as pd
 
 os.system(f"{sys.executable} -m pip install feedparser")
-os.system(f"{sys.executable} -m pip install -U pytd")
+os.system(f"{sys.executable} -m pip install -U pytd==1.4.3")
 
 apikey = os.environ.get("TD_API_KEY")
 apiserver = os.environ.get("TD_API_SERVER")

@@ -2,7 +2,7 @@ import io
 import os
 import sys
 
-os.system(f"{sys.executable} -m pip install -U pytd")
+os.system(f"{sys.executable} -m pip install -U pytd==1.4.3")
 
 
 class TimeSeriesPredictor(object):
