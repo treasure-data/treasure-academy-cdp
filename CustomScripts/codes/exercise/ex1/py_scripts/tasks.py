@@ -4,8 +4,6 @@
 import os
 import sys
 
-import pandas as pd
-
 os.system(f"{sys.executable} -m pip install feedparser")
 os.system(f"{sys.executable} -m pip install -U pytd==1.4.3")
 
@@ -16,6 +14,8 @@ apiserver = os.environ.get("TD_API_SERVER")
 def rss_import(dest_db: str, dest_table: str, rss_url_list):
     import feedparser
     import pytd
+    import pandas as pd
+
 
     posts = []
     # Fetch RSS data for each URL in `rss_url_list`

@@ -1,14 +1,14 @@
 import os
 import sys
 
-import pandas as pd
-
 os.system(f"{sys.executable} -m pip install -U pytd==1.4.3")
 
 
 # This function will upload an example CSV for retail sales data
 def upload_dataset(database, table):
     import pytd
+    import pandas as pd
+
 
     apikey = os.environ["TD_API_KEY"]
     apiserver = os.environ["TD_API_SERVER"]
