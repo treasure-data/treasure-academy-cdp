@@ -9,4 +9,4 @@ _export:
     image: "digdag/digdag-python:3.7"
   _env:
     TD_API_KEY: ${secret:td.apikey}
-    TD_API_SERVER: ${secret:td.apiserver}
+    TD_API_SERVER: "https://api.treasuredata.com"

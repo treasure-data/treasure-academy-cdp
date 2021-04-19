@@ -10,7 +10,7 @@ _export:
     image: "digdag/digdag-python:3.7"
   _env:
     TD_API_KEY: ${secret:td.apikey}
-    TD_API_SERVER: ${secret:td.apiserver}
+    TD_API_SERVER: "https://api.treasuredata.com"
 
 +write_into_td:
   py>: py_scripts.examples.write_td_table
@@ -20,4 +20,4 @@ _export:
     image: "digdag/digdag-python:3.7"
   _env:
     TD_API_KEY: ${secret:td.apikey}
-    TD_API_SERVER: ${secret:td.apiserver}
+    TD_API_SERVER: "https://api.treasuredata.com"

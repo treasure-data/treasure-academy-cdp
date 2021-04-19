@@ -17,4 +17,4 @@ _export:
     - "https://feeds.dailyfeed.jp/feed/s/7/887.rss"
   _env:
     TD_API_KEY: ${secret:td.apikey}
-    TD_API_SERVER: ${secret:td.apiserver}
+    TD_API_SERVER: "https://api.treasuredata.com"
