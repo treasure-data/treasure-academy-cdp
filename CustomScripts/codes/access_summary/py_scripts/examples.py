@@ -42,7 +42,7 @@ def summarize_access_pandas(database_name, table_name):
     
     res = client.query(f"select code, method from  sample_datasets.www_access")
     df = pd.DataFrame(**res)
-    df2 = df.groupby(["code", "method"]).size.to_frame("size").reset_index()
+    df2 = df.groupby(["code", "method"]).size().to_frame("size").reset_index()
 
     client.load_table_from_dataframe(
         df2,
