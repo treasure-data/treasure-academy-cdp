@@ -5,7 +5,7 @@ import os
 import sys
 
 os.system(f"{sys.executable} -m pip install feedparser")
-os.system(f"{sys.executable} -m pip install -U pytd==1.4.3")
+os.system(f"{sys.executable} -m pip install -U pytd==1.4.0")
 
 apikey = os.environ.get("TD_API_KEY")
 apiserver = os.environ.get("TD_API_SERVER")
