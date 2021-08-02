@@ -110,7 +110,7 @@ class TimeSeriesPredictor(object):
         forecast.ds = forecast.ds.apply(str)
 
         # Store prediction results
-        client.load_table_from_dataframe(forecast, target_table, if_exists="overwrite")
+        client.load_table_from_dataframe(forecast, target_table, if_exists="overwrite", fmt='msgpack')
 
 
 if __name__ == "__main__":
