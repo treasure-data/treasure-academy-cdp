@@ -35,7 +35,7 @@ def rss_import(dest_db: str, dest_table: str, rss_url_list):
     # Create `dest_db` database if not exists
     client.create_database_if_not_exists(dest_db)
     # Upload and append the dataframe to TD as `dest_db`.`dest_table`
-    client.load_table_from_dataframe(df, dest_table, if_exists="append")
+    client.load_table_from_dataframe(df, dest_table, if_exists="append", fmt='msgpack')
 
 
 if __name__ == "__main__":
