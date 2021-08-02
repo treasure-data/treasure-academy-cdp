@@ -47,4 +47,5 @@ def summarize_access_pandas(database_name, table_name):
     client.load_table_from_dataframe(
         df2,
         f"{database_name}.{table_name}",
-        if_exists="overwrite")
+        if_exists="overwrite",
+        fmt="msgpack")
