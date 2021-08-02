@@ -26,7 +26,7 @@ def write_td_table(database_name, table_name):
 
     client.create_database_if_not_exists(database_name)
     client.load_table_from_dataframe(
-        df, f"{database_name}.{table_name}", if_exists="overwrite"
+        df, f"{database_name}.{table_name}", if_exists="overwrite", fmt='msgpack'
     )
 
 if __name__ == "__main__":
