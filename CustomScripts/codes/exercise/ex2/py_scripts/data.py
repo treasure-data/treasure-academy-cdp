@@ -22,6 +22,6 @@ def upload_dataset(database, table):
 
     df = pd.read_csv(target_url)
     client.create_database_if_not_exists(database)
-    client.load_table_from_dataframe(df, table, if_exists="overwrite")
+    client.load_table_from_dataframe(df, table, if_exists="overwrite", fmt='msgpack')
 
     return True
