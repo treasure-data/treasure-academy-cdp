@@ -7,10 +7,13 @@ There are two directories for code snippets and setting up the environment.
 There are four directories, and each corresponds to the hands-on session
 in the seminar.
 
-- Lesson1: Workflow first step
-- Lesson2: Data import / Export
-- Lesson3: Error notification
-- Lesson4: Loop and condition 
+- handson: Data import/Export
+- ex1: Setting Schedule
+- ex2: Using JavaScript
+- ex3: Error notification
+- ex4: Loop and condition 
+- ex5: Advanced Setting Schedule
+- ex6: Dynamic Generated Query
 
 ## How to setup
 
