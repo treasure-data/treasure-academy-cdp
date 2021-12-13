@@ -1,0 +1,6 @@
+_export:
+  td:
+    database: academy_demotest
+
++step1:
+  td_load>: sftp_import_XXXXXXXXX  # FIXME

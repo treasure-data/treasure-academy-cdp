@@ -1,0 +1,19 @@
+_export:
+  td:
+    database: l0_snipcart
+    table: abandoned_cart
+  snipcart:
+    url: https://app.snipcart.com/api/carts/abandoned?offset=0&limit=50&timeRange=LessThanAMonth
+
++write_into_td:
+  py>: py_scripts.snipcart.write_abandoned_to_table
+  url: ${snipcart.url}
+  database: ${td.database}
+  table: ${td.table}
+  docker:
+    image: "digdag/digdag-python:3.9"
+  _env:
+    TD_API_KEY: ${secret:td.apikey}
+    SNIPCART_API_KEY: ${secret:snipcart.apikey}
+    SNIPCART_API_PASS: ${secret:snipcart.passwd}
+    TD_API_SERVER: "https://api.treasuredata.com"

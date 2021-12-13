@@ -1,0 +1,38 @@
+in:
+  type: sftp
+  host: ${secret:sftp.host}
+  port: ${secret:sftp.port}
+  user: ${secret:sftp.user}
+  password: ${secret:sftp.password}
+  auth_method: ${sftp.auth_method}
+  user_directory_is_root: ${sftp.user_directory_is_root}
+  timeout: ${sftp.timeout}
+  path_prefix: /embulk/sample_
+  path_match_pattern: \.csv$
+  incremental: true
+  parser:
+    charset: UTF-8
+    newline: LF
+    type: csv
+    delimiter: ","
+    quote: "\""
+    escape: "\""
+    trim_if_not_quoted: false
+    #skip_header_lines: 1
+    allow_extra_columns: false
+    allow_optional_columns: false
+    skip_whitespace: true
+    skip_quote: true
+    columns:
+    - {name: td_client_id, type: string}
+    - {name: td_jpname, type: string}
+    - {name: td_name, type: string}
+    - {name: email, type: string}
+out: {}
+filters:
+- type: add_time
+  to_column:
+    name: time
+    type: timestamp
+  from_value:
+    mode: upload_time

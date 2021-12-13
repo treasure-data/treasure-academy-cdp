@@ -1,0 +1,18 @@
+_export:
+  td:
+    database: l0_sftp_server
+    table: user_data_yaml
+  sftp:
+    auth_method: Password
+    user_directory_is_root: false
+    timeout: 600
+
++prepare_table:
+  td_ddl>:
+  database: ${td.database}
+  create_tables: ["${td.table}"]
+
++load_step:
+  td_load>: config/sftp_load.yml
+  database: ${td.database}
+  table: ${td.table}

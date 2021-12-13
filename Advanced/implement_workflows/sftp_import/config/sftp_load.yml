@@ -1,0 +1,68 @@
+in:
+  type: sftp
+  host: ${secret:sftp.host}
+  port: ${secret:sftp.port}
+  user: ${secret:sftp.user}
+  password: ${secret:sftp.password}
+  auth_method: ${sftp.auth_method}
+  user_directory_is_root: ${sftp.user_directory_is_root}
+  timeout: ${sftp.timeout}
+  path_prefix: "/cdp/user_master.csv"
+  parser:
+    charset: UTF-8
+    newline: LF
+    type: csv
+    delimiter: ","
+    quote: "\""
+    escape: "\""
+    trim_if_not_quoted: false
+    skip_header_lines: 1
+    allow_extra_columns: false
+    allow_optional_columns: false
+    skip_whitespace: true
+    skip_quote: true
+    columns:
+    - {name: td_url, type: string}
+    - {name: td_charset, type: string}
+    - {name: td_description, type: string}
+    - {name: td_browser_version, type: string}
+    - {name: td_os, type: string}
+    - {name: td_ip, type: string}
+    - {name: td_browser, type: string}
+    - {name: td_referrer, type: string}
+    - {name: td_version, type: string}
+    - {name: td_title, type: string}
+    - {name: td_language, type: string}
+    - {name: td_color, type: string}
+    - {name: td_os_version, type: string}
+    - {name: td_user_agent, type: string}
+    - {name: td_platform, type: string}
+    - {name: td_path, type: string}
+    - {name: td_host, type: string}
+    - {name: td_screen, type: string}
+    - {name: td_client_id, type: string}
+    - {name: td_global_id, type: string}
+    - {name: td_viewport, type: string}
+    - {name: _wpcf7_version, type: string}
+    - {name: post_type, type: string}
+    - {name: your_email, type: string}
+    - {name: _wpcf7, type: string}
+    - {name: _wpcf7_container_post, type: string}
+    - {name: _wpcf7_unit_tag, type: string}
+    - {name: _wpcf7_locale, type: string}
+    - {name: s, type: string}
+    - {name: gender, type: string}
+    - {name: activities, type: string}
+    - {name: age, type: string}
+    - {name: activities_1, type: string}
+    - {name: td_time_on_page, type: string}
+    - {name: td_city, type: string}
+    - {name: td_region, type: string}
+    - {name: td_country, type: string}
+    - {name: td_postal, type: string}
+    - {name: td_subscription, type: string}
+    - {name: username, type: string}
+    - {name: record_id, type: string}
+    - {name: adl_timestamp, type: string}
+    - {name: time, type: long}
+out: {}

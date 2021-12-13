@@ -1,0 +1,16 @@
+timezone: UTC
+ 
+_export:
+  td:
+    database: l0_access_log
+ 
++td-result-into-target:
+  td>: queries/mailchimp.sql
+  result_connection: tda_mailchimp
+  result_settings:
+    list_id: ${secret:mailchimp.audienceid}
+    email_column: email
+    fname_column: fname
+    lname_column: lname
+    update_existing: true
+#    grouping_columns: age, region
