@@ -1,0 +1,116 @@
+############################ banner ##########################
+banner:
+  enable : true
+  title : "Ride Bikes, Feel Good."
+  content : "Treasure Bike is a DUMMY EC Site for Treasure Academy"
+  image : "images/banner.png"
+  # button
+  button:
+    enable : true
+    label : "All Products"
+    link : "products"
+
+########################## About ##############################
+about:
+  enable : true
+  title : "About Our Product"
+  content : "Treasure Bike is a sample e-commerce site for training.
+日本語も表示できます。"
+  image : "images/about.jpg"
+
+
+###################### Call to action ########################
+cta:
+  enable : true
+  title : "New Arrivals"
+  content : "TreasureBike Mens Mountain Helmet
+A lightweight, breathable cycling helmet for all types of riding with the advanced protection of WaveCel technology."
+  image : "images/cta.png"
+  overlayImage : "images/cta-overlay.png"
+  button:
+    label : "All Products"
+    link : "products"
+
+######################## raw material #######################
+material:
+  enable : true
+  title : "Newsroom"
+  subtitle : "Latest newsroom of Treasure Bikes"
+  materialItem:
+    # material item loop
+    - title : "An Overview Of The Latest 'Ride Changing' Bike Technology
+"
+      image : "images/blog/post-1.jpg"
+      content : "Since the invention of the 'safety bicycle' in 1885, there have been few times in history that have seen the types of monumental advances in road bike technology as we have seen in the past few years. The changes might not be quite as monumental as the advent of steering, gears and pneumatic tires in […]"
+      
+    # material item loop
+    - title : "Beginner’s Guide to Mountain Biking"
+      image : "images/blog/post-2.jpg"
+      content : "'Eat before you’re hungry; drink before you’re thirsty.' These are two suggestions most bikers have heard, and if they’ve ridden very much they value them for their simplicity and truth. Wait too long to replenish your body and you’ll be dragging till the carbs and liquids kick in. But a third similarly simple and truthful […]"
+      
+    # material item loop
+    - title : "Best Mountain Bikes 2019"
+      image : "images/blog/post-3.jpg"
+      content : "What’s New in Mountain Bike Design With the widespread adoption of dropper posts, better suspension, and geometry that favors longer front ends and tighter rear ends, it’s now possible to shred pretty hard on bikes with less travel. Bikes like the Kona Process, Evil Offering, and more recently, Giant Trance have less than 120mm of […]"
+
+    # material item loop
+    - title : "The Ultimate Bicycle Helmet Buyer’s Guide"
+      image : "images/blog/post-4.jpg"
+      content : "They are on top of mind but rarely thought about, a compulsory part of riding that doesn’t have anything to do with the bike and a literal life saver for the cost of a tee-shirt […]"
+      
+
+########################### Advantage #########################
+advantage:
+  enable : true
+  title : "Advantages Of Using <br> Our Product"
+  subtitle : "Treasure bikes provides high quality and low cost products"
+  image : "images/advantage.jpg"
+  advantageList:
+    # advantage list loop
+    - listItem : "Extremely lightweight"
+    - listItem : "Excellent breathability"
+    - listItem : "Excellent durability"
+    - listItem : "High quality"
+    - listItem : "Won many awards"
+    - listItem : "日本語でも提供"
+
+
+######################## Products #############################
+products:
+  enable : true
+  title : "Products List"
+  # product item comes from "content/products"
+
+
+########################## Testimonial ########################
+testimonial:
+  enable : true
+  title : "What People Are Saying <br> About Our Product"
+  testimonialItem:
+    # testimonial item loop
+    - name : "Angelo Perara"
+      image : "images/clients/client-1.jpg" # size 100px*100px
+      designation : "CEO, Dialogue Broad Band"
+      content : "Treasure Bike is a great product! <br> I recommend it to everyone."
+      rating : "five" # rating star, one to five
+      
+    # testimonial item loop
+    - name : "Riya Ventila"
+      image : "images/clients/client-2.jpg" # size 100px*100px
+      designation : "CEO, Dialogue Broad Band"
+      content : "Treasure Bike is a great product! <br> I recommend it to everyone."
+      rating : "five" # rating star, one to five
+      
+    # testimonial item loop
+    - name : "john Doe"
+      image : "images/clients/client-3.jpg" # size 100px*100px
+      designation : "CEO, Dialogue Broad Band"
+      content : "Treasure Bike is a great product! <br> I recommend it to everyone."
+      rating : "five" # rating star, one to five
+      
+    # testimonial item loop
+    - name : "Riya Ventila"
+      image : "images/clients/client-2.jpg" # size 100px*100px
+      designation : "CEO, Dialogue Broad Band"
+      content : "Treasure Bike is a great product! <br> I recommend it to everyone."
+      rating : "four" # rating star, one to five

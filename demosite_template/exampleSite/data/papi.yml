@@ -1,0 +1,9 @@
+############################# PAPI info ################
+papi:
+  enable : true
+  # office
+  funnel:
+    title : "Treasure Bike Shop Profile API"
+    content : "Terasure Bikes Profile-API sample page."
+    # other information comes from "config.toml"
+

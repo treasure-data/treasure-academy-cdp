@@ -1,0 +1,91 @@
+<script>
+let login_f=0;
+let login_email="";
+
+/* Debug
+netlifyIdentity.open();
+
+// Bind to events
+const user = netlifyIdentity.currentUser();
+
+netlifyIdentity.on('login', user => {
+    login_f = 1;
+    login_email=user.email;
+    console.log('login', user);
+    console.log('login', user.email);
+    console.log("login:" + login_f);
+});
+
+netlifyIdentity.on('logout', user => {
+    login_f = 0;
+    login_email="";
+    console.log('logout', user);
+    console.log("logout:" + login_f);
+});
+
+*/
+
+document.addEventListener('snipcart.ready', () => {
+  // You can safely use window.Snipcart here
+/* Commented by Treasure Academy */
+  this.addItemEvent = window.Snipcart.events.on('item.added', (cartItem) => {
+    console.log("cart.ready");
+    console.log(cartItem);
+    var cartData = {};
+    cartData["id"] = cartItem.id;
+    cartData["name"] = cartItem.name;
+    cartData["basePrice"] = cartItem.basePrice;
+    cartData["unitPrice"] = cartItem.unitPrice;
+    cartData["quantity"] = cartItem.quantity;
+    cartData["url"] = cartItem.url;
+    cartData["event"] = "addcart";
+    if (login_f > 0) {
+        cartData["auth_email"] = login_email;
+    }
+    console.log(cartData);
+    td.trackEvent('cart', cartData);
+  });
+/**/
+    
+/* Commented by Treasure Academy */
+  this.addItemEvent = window.Snipcart.events.on('cart.confirmed', (cartConfirmResponse) => {
+    console.log("cart.confirmed");
+    console.log(cartConfirmResponse);
+
+    var orderData = {};
+    orderData["name"] = cartConfirmResponse.billingAddress.name;
+    orderData["email"] = cartConfirmResponse.email;
+    orderData["paymentmethod"] = cartConfirmResponse.paymentDetails.method;
+    orderData["invoice"] = cartConfirmResponse.invoiceNumber;
+    orderData["token"] = cartConfirmResponse.token;
+    orderData["total"] = cartConfirmResponse.total;
+    orderData["event"] = "confirmed";
+    if (login_f>0) {
+        orderData["auth_email"] = login_email;
+    }
+    console.log(orderData);
+    td.trackEvent('orders', orderData);
+
+    var orderDetails={}
+    var order_id_array=[];
+    var order_item_array=[];
+    var order_item_num_array=[];
+    var order_price_array=[];
+    for (var k = 0; k < cartConfirmResponse.items.items.length; k++) {
+      order_id_array.push(cartConfirmResponse.items.items[k].uniqueId);
+      order_item_array.push(cartConfirmResponse.items.items[k].name);
+      order_price_array.push(cartConfirmResponse.items.items[k].price);
+      order_item_num_array.push(cartConfirmResponse.items.items[k].quantity);
+    }
+    orderData["token"] = cartConfirmResponse.token;
+    orderDetails["order_uniq_id"] = order_id_array;
+    orderDetails["order_item"] = order_item_array;
+    orderDetails["order_price"] = order_price_array;
+    orderDetails["order_quantity"] = order_item_num_array;
+    console.log(orderDetails);
+
+    td.trackEvent('order_details', orderDetails);
+  });
+/**/
+});
+</script>

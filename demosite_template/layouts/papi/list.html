@@ -1,0 +1,102 @@
+{{ define "main" }}
+
+{{ partial "page-title.html" . }}
+
+{{ if site.Data.papi.papi.enable }}
+<section class="section pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+<!-- FIXME -->
+<img src="https://in.treasuredata.com/postback/v3/event/l0_academy_test/pixel_test?td_format=pixel&td_write_key=10868/2bb15debb63258e56a19e58bdd412b4129ed799a&td_global_id=td_global_id&td_ip=td_ip&td_ua=td_ua&key1=val1&key2=val2&key3=val3" />
+        <h3 class="
+        mb-4">Profile API sample</h3>
+        <p>Example: td_client_id = d5b94a74-1005-485a-ba0f-c67b6d12b6ee</p>
+        <p>Example: Profile API Token = 24d82a5e-59a8-48c3-b63a-996a108deaef</p>
+        <form action="{{ site.Params.papi.formAction }}" method="POST">
+          <input type="text" class="form-control mb-2" id="client_id_input" name="td_client_id" placeholder="Enter Client ID">
+          <input type="text" class="form-control mb-2" id="token_input" name="token" placeholder="Enter Profile API Token">
+          <button type="button" class="btn btn-block btn-outline-primary rounded" id="fetch_segment_button">Fetch</button>
+        </form>
+      </div>
+      <div class="highlight" id="resultArea"></div>
+  <script>
+    var fetch_segment_func = function(clientId, token) {
+      var td = new Treasure({
+        host: 'in.treasuredata.com',
+        writeKey: '',
+        database: 'pageviews'
+      });
+
+      var successCallback = function(callbackResults) {
+        var resultMsg  = '<h3>Result</h3>';
+
+        callbackResults.forEach(function(callbackResult) {
+          resultMsg     += '<h4>Key</h4>';
+          resultMsg     += '<ul>';
+          Object.keys(callbackResult.key).forEach(function(key) {
+            resultMsg += '<li>' + key + '</li>';
+          });
+          resultMsg     += '</ul>';
+
+          resultMsg     += '<h4>Segments</h4>';
+          if(callbackResult.values.length <= 0) {
+            resultMsg += '<span>No segments</span>';
+          } else {
+            resultMsg     += '<ul>';
+            callbackResult.values.forEach(function(value) {
+              resultMsg += ('<li>' + value + '</li>');
+            });
+            resultMsg     += '</ul>';
+          }
+
+          resultMsg     += '<h4>Attributes</h4>';
+          if(callbackResult.attributes.length <= 0) {
+            resultMsg += '<span>No attributes</span>';
+          } else {
+            resultMsg += '<ul>';
+            Object.keys(callbackResult.attributes).forEach(function(key) {
+              resultMsg += ('<li>' + key + ' = ' + callbackResult.attributes[key] + '</li>');
+            });
+            resultMsg += '</ul>';
+          }
+        });
+
+        var resultArea = document.getElementById('resultArea');
+        resultArea.innerHTML = resultMsg;
+      }
+
+      var errorCallback = function(error) {
+        console.log(error);
+        resultArea.innerHTML = error;
+      }
+
+      if (token === '') {
+          // FIXME
+          // default API token for Debugging
+          token = '24d82a5e-59a8-48c3-b63a-996a108deaef';
+      } 
+
+console.log("clientId = " + clientId);
+console.log("token = " +token);
+
+      td.fetchUserSegments({
+        audienceToken: [token],
+        keys: {td_client_id: clientId}
+      }, successCallback, errorCallback);
+    }
+
+    document.getElementById('fetch_segment_button').onclick = function() {
+      var clientId = document.getElementById('client_id_input').value;
+      var token    = document.getElementById('token_input').value;
+      fetch_segment_func(clientId, token);
+    };
+  </script>
+
+    </div>
+  </div>
+</section>
+{{ end }}
+
+
+{{ end }}
