@@ -1,0 +1,9 @@
+td:
+  database: l0_sftp_server
+
+company_table_list:
+  - tbl_one
+  - tbl_two
+  - tbl_three
+  - tbl_four
+  - tbl_five

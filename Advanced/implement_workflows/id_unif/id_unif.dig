@@ -1,0 +1,146 @@
+timezone: Asia/Tokyo
+
+_export:
+  # 各変数を定義したファイルを参照
+  !include : config/variable.dig
+
+# 一時テーブルを作成
++create_tmp_table:
+  for_each>:
+    target: ${company_table_list}
+  _parallel: true
+  _do:
+    td>: queries/create_tmp_company_tbl.sql
+    create_table: tmp_company_${target}
+
++unify_company:
+  td_for_each>: queries/get_table_combination.sql
+  _do:
+    # tmp_map_xxx_xxxの初期化
+    +create_tmp_map_tables:
+      td_ddl>:
+      empty_tables: ["tmp_map_${td.each.table_name1}_${td.each.table_name2}"]
+
+    # 企業名 + xxで突合（優先度1-7）
+    +unify_company_with_company_name_and_xxx:
+    
+      # 名寄せ項目の組み合わせ取得
+      td_for_each>: queries/get_col_combination_1.sql
+      _do:
+        td>: queries/unify_company_with_company_name_and_xxx.sql
+        insert_into: tmp_map_${td.each.table_name1}_${td.each.table_name2}
+
+    # <中略>:優先度8-11/12-15/16-19毎にtd_for_each>:およびsqlを用意
+
+    # 1:1結合のみ保持&優先度の高い結果の取得
+    +unify_retain_1_1_ids_and_select_by_priority:
+      td>: queries/unify_retain_1_1_ids_and_select_by_priority.sql
+      create_table: map_${td.each.table_name1}_${td.each.table_name2}
+        
+    # マッピングテーブルの縦結合  
+    +create_tmp_map_union_all:
+      td>: 
+      query: |
+        select '${td.each.table_name1}_id' as t1_id_type
+              , ${td.each.table_name1}_id as t1_id
+              , '${td.each.table_name2}_id' as t2_id_type
+              , ${td.each.table_name2}_id as t2_id 
+            from map_${td.each.table_name1}_${td.each.table_name2}
+      insert_into: tmp_map_union_all
+
++via_mapping:
+  # tmpテーブルの初期化
+  +init_tmp_tables:
+    td_ddl>:
+    empty_tables: ["tmp_finalize_query_string", "tmp_map_via_all"]    
+
+  # tmp_map_union_all内のidマッピングの逆方向の行を挿入
+  +create_map_union_all:
+    +insert_reverse_map_rows:
+      td>: queries/insert_reverse_map_rows.sql
+      insert_into: tmp_map_union_all
+
+    # tmp_map_union_all を map_union_allにリネーム
+    +rename:
+      td_ddl>: 
+      rename_tables: [{from: "tmp_map_union_all", to: "map_union_all"}]
+
+  # tmp_comapny_xxxのテーブル数を取得（後段のループ処理のため）
+  +count_num_of_company_tables:
+    td>: 
+    query: |
+      select count(1) as company_table_cnt 
+      from unnest(split('${company_table_list.join(",")}', ',')) as t(table_name)
+    store_last_results: true
+
+  # テーブル数分 map_union_all を自己結合して、別テーブル経由でのidマッピングを取得する
+  +create_via_tables:
+    loop>: ${td.last_results.company_table_cnt - 1}
+    _do:
+
+      # map_union_all を自己結合するための query文を生成
+      +create_query_string:
+        if>: ${i == 0}
+        _do:
+          +create_blank_line:
+            td>:
+            query: select '' as query_string, 'step${i}.t2_id_type' as query_string2
+            insert_into: tmp_finalize_query_string
+        _else_do:
+          +create_innner_join_line:
+            td>:
+            query: select 'inner join map_union_all as step${i} on step${i-1}.t2_id_type = step${i}.t1_id_type and step${i-1}.t2_id = step${i}.t1_id and step0.t1_id_type != step${i}.t2_id_type' as query_string
+            insert_into: tmp_finalize_query_string
+
+      # inner join のコードを query 内で展開するために一行にする
+      +inner_join_string_into_one_line:
+        td>:
+        query: |
+          select array_join(array_sort(array_agg(query_string)),' ') as inner_join_line
+          from tmp_finalize_query_string
+        store_last_results: true          
+    
+      # 別テーブル経由（via1, via2, via3, , ,） の紐付け結果を順にtmp_map_via_allに追加する
+      +insert_map_rows:
+        td>: queries/via_mapping.sql
+        insert_into: tmp_map_via_all
+
+# map_all（最終的なidマッピングテーブル）の作成
++create_map_all:
+
+  # 別テーブルを経由したidマッピングによってN:N紐付けとなったidを除外する
+  +step1_exclude_n_to_n_ids:
+    td>: queries/create_map_all_step1.sql
+    create_table: tmp_map_all_step1
+
+  # 横持ちテーブルへの変換
+  +step2_pivot_tmp_map_all:
+
+    # tmp_map_all_step2テーブルの初期化
+    +init_tmp_map_all_step2:
+      td_ddl>:
+      empty_tables: ["tmp_map_all_step2"] 
+   # DBテーブル毎に各DBテーブルidをキーに横持ちテーブルへ変換
+    +pivot_tmp_map_all:
+
+      # query 文の生成
+      +create_query_string:
+        td_for_each>: queries/create_map_all_step2_pivot_query_string.sql
+        _do:
+          # DBテーブルid 毎に横持ちテーブルへ変換し、temp_map_all_step2に追加
+          +pivot:
+            td>: queries/create_map_all_step2_pivot.sql
+            insert_into: tmp_map_all_step2
+
+    # DBテーブルid毎に横持ちテーブルにした結果、重複する行（全てのidが統合された行）を削除
+    +delete_dup_rows:
+
+      # query 文の生成
+      +create_query_string:
+        td>: queries/create_map_all_step2_delete_dup_query_string.sql
+        store_last_results: true
+
+      # 重複行の削除
+      +delete_dup:
+        td>: queries/create_map_all_step2_delete_dup.sql
+        create_table: map_all
