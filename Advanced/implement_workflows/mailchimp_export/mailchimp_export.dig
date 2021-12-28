@@ -2,7 +2,7 @@ timezone: UTC
  
 _export:
   td:
-    database: l0_access_log
+    database: l2_mail_data
  
 +td-result-into-target:
   td>: queries/mailchimp.sql
@@ -13,4 +13,4 @@ _export:
     fname_column: fname
     lname_column: lname
     update_existing: true
-#    grouping_columns: age, region
+    merge_fields: access_cnt
