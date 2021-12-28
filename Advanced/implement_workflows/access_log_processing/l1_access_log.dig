@@ -1,0 +1,20 @@
+timezone: Asia/Tokyo
+ 
+_export:
+  td:
+    database: l1_access_log
+    table: orders
+ 
++prepare_database:
+  td_ddl>:
+  create_databases:
+  - ${td.database}
+
++l1_orders_process:
+  td>: queries/11_process_orders.sql
+  create_table: ${td.table}
+
++l1_pageviews_process:
+  td>: 
+  query: "SELECT * FROM l0_access_log.pageviews"
+  create_table: pageviews

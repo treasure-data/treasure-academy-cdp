@@ -1,0 +1,16 @@
+timezone: Asia/Tokyo
+ 
+_export:
+  td:
+    database: l2_mail_data
+    table: mailchimp_list
+ 
++prepare_database:
+  td_ddl>:
+  create_databases:
+  - ${td.database}
+
++l2_join_tables:
+  td>: queries/12_process_join.sql
+  create_table: ${td.table}
+
