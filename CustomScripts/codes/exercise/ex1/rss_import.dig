@@ -13,7 +13,7 @@ _export:
   dest_db: ${td.database}
   dest_table: ${td.table}
   rss_url_list:
-    - "https://www.vogue.co.jp/rss/vogue"
+    - "https://www.nhk.or.jp/rss/news/cat0.xml"
     - "https://feeds.dailyfeed.jp/feed/s/7/887.rss"
   _env:
     TD_API_KEY: ${secret:td.apikey}
