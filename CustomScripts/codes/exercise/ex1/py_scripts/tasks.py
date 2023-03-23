@@ -40,7 +40,7 @@ def rss_import(dest_db: str, dest_table: str, rss_url_list):
 
 if __name__ == "__main__":
     feeds = [
-        "https://www.vogue.co.jp/rss/vogue",
+        "https://www.nhk.or.jp/rss/news/cat0.xml",
         "https://feeds.dailyfeed.jp/feed/s/7/887.rss",
     ]
     rss_import("rss_db", "rss_tbl", feeds)
