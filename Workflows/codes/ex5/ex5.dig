@@ -1,0 +1,15 @@
+_export:
+  td:
+    database: sample_datasets
+
++task1:
+  td>:
+  query: select random(9) as num
+  store_last_results: true
+
++task2:
+  if>: ${td.last_results.num > 5}
+  _do:
+    echo>: 大きい
+  _else_do:
+    echo>: 小さい
