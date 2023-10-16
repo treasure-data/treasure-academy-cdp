@@ -1,0 +1,10 @@
+_export:
+  td:
+    database: sample_datasets
+
++task1:
+  td>: queries/query.sql
+  store_last_results: true
+
++task2:
+  echo>: "Record count: ${td.last_results.cnt}"
