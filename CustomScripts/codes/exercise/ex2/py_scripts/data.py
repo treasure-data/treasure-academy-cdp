@@ -1,8 +1,7 @@
 import os
 import sys
 
-os.system(f"{sys.executable} -m pip install -U pytd==1.4.0")
-
+#os.system(f"{sys.executable} -m pip install -U pytd==1.4.0")
 
 # This function will upload an example CSV for retail sales data
 def upload_dataset(database, table):

@@ -8,7 +8,7 @@ _export:
 
 +step1:
   docker:
-    image: "digdag/digdag-python:3.9"
+    image: "treasuredata/customscript-python:3.12.11-td0"
   py>: py_scripts.tasks.rss_import
   dest_db: ${td.database}
   dest_table: ${td.table}

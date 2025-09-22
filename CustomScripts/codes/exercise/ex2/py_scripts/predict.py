@@ -2,8 +2,8 @@ import io
 import os
 import sys
 
-os.system(f"{sys.executable} -m pip install -U pytd==1.4.0")
-
+#os.system(f"{sys.executable} -m pip install -U pytd==1.4.0")
+os.system(f"{sys.executable} -m pip install prophet")
 
 class TimeSeriesPredictor(object):
     def _upload_graph(self, model, forecast):
@@ -71,7 +71,7 @@ class TimeSeriesPredictor(object):
 
         import pytd
         import pandas as pd
-        from fbprophet import Prophet
+        from prophet import Prophet
 
         # Ensure type of period is integer
         period = int(period)

@@ -1,7 +1,7 @@
 import os
 import sys
 
-os.system(f"{sys.executable} -m pip install --upgrade pytd==1.4.0")
+#os.system(f"{sys.executable} -m pip install --upgrade pytd==1.4.0")
 apikey = os.environ["TD_API_KEY"]
 apiserver = os.environ["TD_API_SERVER"]
 
